@@ -129,6 +129,571 @@ const ALEJ_PROGS = [
    ]}
 ];
 
+// ── CELEBRITY & ATHLETE PROGRAMS ──────────────────────────────────────────────
+const CELEB_PROGS = [
+  {id:'daisy_ridley',name:'Daisy Ridley',icon:'⚔️',color:'#4ecdc4',type:'strength',category:'Actresses',
+   desc:'Star Wars Last Jedi — 7 days/week full body',
+   days:[
+    {day:'Monday — Full Body Strength',exercises:[
+      {name:'Deadlift',sets:3,reps:'8, 5, 3',rest:120},
+      {name:'T-Bar Row',sets:3,reps:'8, 8, 6',rest:90},
+      {name:'Seated Lateral Raise',sets:3,reps:'12',rest:60},
+      {name:'One Arm Landmine Push Press',sets:3,reps:'8, 8, 6',rest:90},
+      {name:'Push Ups',sets:3,reps:'10',rest:60},
+      {name:'Barbell Curls',sets:3,reps:'10',rest:60},
+    ]},
+    {day:'Tuesday — Speed, Plyometrics & Abs',exercises:[
+      {name:'HIIT Cardio or Plyometric Drills',sets:1,reps:'15-20 min',rest:0,note:'Cone drills, speed ladder, box jumps'},
+      {name:'Plank',sets:3,reps:'20s',rest:20},
+      {name:'Ab Crunch',sets:3,reps:'10',rest:20},
+      {name:'Bicycle Crunch',sets:3,reps:'10 each leg',rest:20},
+      {name:'Lying Heel Touches',sets:3,reps:'10 each leg',rest:20},
+      {name:'Lying Floor Leg Raise',sets:3,reps:'10',rest:20},
+    ]},
+    {day:'Wednesday — Full Body Strength',exercises:[
+      {name:'Barbell Back Squat',sets:3,reps:'8, 5, 3',rest:120},
+      {name:'Overhead Press',sets:3,reps:'8, 8, 6',rest:90},
+      {name:'Bent Over Row',sets:3,reps:'8, 8, 6',rest:90},
+      {name:'Lateral Raise',sets:3,reps:'12',rest:60},
+      {name:'Barbell Walking Lunge',sets:3,reps:'12 each leg',rest:90},
+      {name:'Spider Curls',sets:3,reps:'10',rest:60},
+    ]},
+    {day:'Thursday — Speed, Plyometrics & Abs',exercises:[
+      {name:'HIIT Cardio or Plyometric Drills',sets:1,reps:'15-20 min',rest:0,note:'Cone drills, speed ladder, box jumps'},
+      {name:'Plank',sets:3,reps:'20s',rest:20},
+      {name:'Ab Crunch',sets:3,reps:'10',rest:20},
+      {name:'Bicycle Crunch',sets:3,reps:'10 each leg',rest:20},
+      {name:'Lying Heel Touches',sets:3,reps:'10 each leg',rest:20},
+      {name:'Lying Floor Leg Raise',sets:3,reps:'10',rest:20},
+    ]},
+    {day:'Friday — Full Body Strength',exercises:[
+      {name:'Dumbbell Lunge',sets:3,reps:'8, 8, 6',rest:90},
+      {name:'Dumbbell Clean & Press',sets:3,reps:'8, 5, 3 each side',rest:90},
+      {name:'Lateral Lunge',sets:3,reps:'8',rest:60},
+      {name:'Stiff Legged Dumbbell Deadlift',sets:3,reps:'8',rest:90},
+      {name:'Dumbbell Bench Press',sets:3,reps:'10',rest:60},
+      {name:'Dumbbell Skullcrusher',sets:3,reps:'10',rest:60},
+    ]},
+    {day:'Saturday — Full Body Circuit',exercises:[
+      {name:'Turkish Get Up',sets:3,reps:'8',rest:90},
+      {name:'Squat Jump',sets:3,reps:'12',rest:45},
+      {name:'Push Up',sets:3,reps:'12',rest:45},
+      {name:'Pull Up',sets:3,reps:'12',rest:45},
+      {name:'Bodyweight Hip Thrust',sets:3,reps:'12',rest:45},
+      {name:'Band Pull Apart',sets:3,reps:'12',rest:30},
+      {name:'Cardio',sets:1,reps:'20-30 min',rest:0},
+    ]},
+    {day:'Sunday — Active Recovery',exercises:[
+      {name:'Light Activity',sets:1,reps:'30-60 min',rest:0,note:'Hiking, rock climbing, or yoga'},
+    ]},
+  ]},
+  {id:'brie_larson',name:'Brie Larson',icon:'🦸‍♀️',color:'#ffa94d',type:'strength',category:'Actresses',
+   desc:'Captain Marvel — 4 day strength program',
+   days:[
+    {day:'Day 1 — Upper Body',exercises:[
+      {name:'Upper Body Activation Flow',sets:1,reps:'5 min',rest:0},
+      {name:'Dead Bugs',sets:3,reps:'15 each',rest:45},
+      {name:'Pull Ups',sets:3,reps:'5-8',rest:90},
+      {name:'Push Ups',sets:3,reps:'8-12+',rest:60},
+      {name:'Overhead Press',sets:4,reps:'5',rest:120},
+      {name:'Inverted Row',sets:3,reps:'8-12',rest:60},
+      {name:'Dumbbell Row',sets:4,reps:'5',rest:90},
+      {name:'Plank',sets:3,reps:'1 min+',rest:30},
+    ]},
+    {day:'Day 2 — Lower Body',exercises:[
+      {name:'Lower Body Activation Flow',sets:1,reps:'5 min',rest:0},
+      {name:'Landmine Goblet Squat',sets:3,reps:'5-8',rest:90},
+      {name:'Barbell Hip Thrust',sets:4,reps:'5',rest:90},
+      {name:'Plie Squat',sets:3,reps:'8-12',rest:60},
+      {name:'Rear Lunge',sets:3,reps:'8-12 each',rest:60},
+      {name:'Glute Hyperextension',sets:3,reps:'8-12',rest:60},
+    ]},
+    {day:'Day 4 — Full Body',exercises:[
+      {name:'Full Body Activation Flow',sets:1,reps:'5 min',rest:0},
+      {name:'Deadlifts',sets:5,reps:'3-5',rest:180},
+      {name:'Pull Ups',sets:3,reps:'5-8',rest:90},
+      {name:'Dumbbell Bench Press',sets:3,reps:'6-8',rest:90},
+      {name:'Overhead Walking Lunge',sets:3,reps:'8',rest:60},
+      {name:'Hip Thrust',sets:3,reps:'5',rest:90},
+      {name:'Barbell Rollouts',sets:3,reps:'8',rest:60},
+    ]},
+    {day:'Day 6 — Full Body',exercises:[
+      {name:'Full Body Activation Flow',sets:1,reps:'5 min',rest:0},
+      {name:'Split Squats',sets:5,reps:'3-5 each',rest:120},
+      {name:'Barbell Row',sets:3,reps:'5-8',rest:90},
+      {name:'Band Pulls',sets:3,reps:'8-12',rest:45},
+      {name:'Dumbbell Shoulder Press',sets:3,reps:'6-8',rest:90},
+      {name:'Barbell Glute Bridge',sets:3,reps:'5-8',rest:90},
+      {name:'Pallof Press',sets:3,reps:'12-15 each',rest:45},
+    ]},
+   ]},
+  {id:'stephen_amell',name:'Stephen Amell',icon:'🏹',color:'#51cf66',type:'strength',category:'Actors',
+   desc:'Arrow — strength & functional training 3 days/week',
+   days:[
+    {day:'Day 1 — Strength',exercises:[
+      {name:'Kettlebell Turkish Get Up',sets:1,reps:'3 each side',rest:90},
+      {name:'Lateral Box Jump',sets:3,reps:'20',rest:60},
+      {name:'Bulgarian Split Squat (Rear Foot Elevated)',sets:3,reps:'6 each side',rest:90},
+      {name:'Single-Arm DB Flat Bench Press',sets:3,reps:'6 each side',rest:90},
+      {name:'TRX Suspension Row',sets:3,reps:'to failure',rest:60},
+      {name:'Standing DB Side Lateral Raise',sets:3,reps:'6',rest:60},
+      {name:'Single-Arm Cable Lat Pulldown',sets:3,reps:'6 each side',rest:60},
+      {name:'Hanging Straight Leg Raise',sets:3,reps:'to failure',rest:45},
+    ]},
+    {day:'Day 2 — Active Recovery',exercises:[
+      {name:'MMA / Kickboxing / Jiu-Jitsu',sets:1,reps:'30-60 min',rest:0,note:'Or archery, parkour, running'},
+    ]},
+    {day:'Day 3 — Strength',exercises:[
+      {name:'Pallof Press',sets:2,reps:'6 each side',rest:60},
+      {name:'Standing Barbell Push Press (Split Stance)',sets:3,reps:'6',rest:90},
+      {name:'Single Leg Dumbbell Deadlift',sets:3,reps:'6 each side',rest:90},
+      {name:'Standing Cable Chest Fly',sets:3,reps:'6',rest:60},
+      {name:'Bent-Over Barbell Row',sets:3,reps:'6',rest:90},
+      {name:'Handstand Push Up',sets:3,reps:'to failure',rest:60},
+      {name:'Medium/Wide-Grip Pull Up',sets:3,reps:'to failure',rest:60},
+      {name:'Russian Twist',sets:3,reps:'to failure',rest:45},
+    ]},
+    {day:'Day 5 — Strength',exercises:[
+      {name:'Half-Kneeling Cable Wood Chop',sets:2,reps:'6',rest:60},
+      {name:'Single-Arm Kettlebell Snatch',sets:3,reps:'20 each side',rest:60},
+      {name:'Barbell Back Squat',sets:3,reps:'6',rest:120},
+      {name:'Push Up',sets:3,reps:'to failure',rest:60},
+      {name:'Bent-Over Dumbbell Row',sets:3,reps:'6 each side',rest:60},
+      {name:'Single Arm DB Shoulder Press',sets:3,reps:'6 each side',rest:90},
+      {name:'Standing Cable Low Row',sets:3,reps:'6',rest:60},
+      {name:'V-Sits',sets:3,reps:'to failure',rest:45},
+    ]},
+   ]},
+  {id:'chris_evans',name:'Chris Evans',icon:'🛡️',color:'#7c6fff',type:'strength',category:'Actors',
+   desc:'Captain America — 4-5 day lower/upper split',
+   days:[
+    {day:'Day 1 — Lower Body',exercises:[
+      {name:'Squat',sets:3,reps:'5',rest:180},
+      {name:'Deadlift',sets:3,reps:'5',rest:180},
+      {name:'Jump Squats',sets:2,reps:'12',rest:60},
+      {name:'Box Jumps',sets:2,reps:'10',rest:60},
+      {name:'Lying Leg Curl',sets:2,reps:'12',rest:60},
+      {name:'Standing Machine Calf Raise',sets:2,reps:'15',rest:45},
+      {name:'Cardio',sets:1,reps:'10 min jog',rest:0,note:'6 MPH / 2-4 incline'},
+    ]},
+    {day:'Day 2 — Upper Body',exercises:[
+      {name:'Military Press',sets:3,reps:'5',rest:180},
+      {name:'Incline Dumbbell Press',sets:3,reps:'5',rest:120},
+      {name:'Pull Up',sets:3,reps:'12',rest:90},
+      {name:'Z Press',sets:3,reps:'8',rest:90},
+      {name:'Push Up',sets:3,reps:'12',rest:60},
+      {name:'Inverted Row',sets:3,reps:'12',rest:60},
+      {name:'Cardio',sets:1,reps:'10 min jog',rest:0,note:'6 MPH / 2-4 incline'},
+    ]},
+    {day:'Day 3 — Active Recovery',exercises:[
+      {name:'Mobility / Yoga',sets:1,reps:'30-45 min',rest:0,note:'Or HIIT cardio if needed'},
+    ]},
+    {day:'Day 4 — Lower Body',exercises:[
+      {name:'Trap Bar Deadlift',sets:3,reps:'5',rest:180},
+      {name:'Front Squat',sets:3,reps:'5',rest:180},
+      {name:'Leg Press',sets:3,reps:'12',rest:90},
+      {name:'Seated Leg Curl',sets:2,reps:'15',rest:60},
+      {name:'Jumping Lunges',sets:2,reps:'15 each',rest:60},
+      {name:'Seated Calf Raise',sets:2,reps:'15',rest:45},
+      {name:'Cardio',sets:1,reps:'10 min jog',rest:0,note:'6 MPH / 2-4 incline'},
+    ]},
+    {day:'Day 5 — Upper Body',exercises:[
+      {name:'Bent Over Row',sets:3,reps:'5',rest:180},
+      {name:'Incline Bench Press',sets:3,reps:'5',rest:120},
+      {name:'Kneeling Shoulder Press',sets:3,reps:'5',rest:120},
+      {name:'One Arm Dumbbell Row',sets:3,reps:'12',rest:60},
+      {name:'Dips',sets:3,reps:'15',rest:60},
+      {name:'Chin Ups',sets:3,reps:'15',rest:60},
+      {name:'Cardio',sets:1,reps:'10 min jog',rest:0,note:'6 MPH / 2-4 incline'},
+    ]},
+    {day:'Day 7 — Optional Abs & Arms',exercises:[
+      {name:'Plank',sets:3,reps:'30s',rest:20},
+      {name:'Sit Up',sets:3,reps:'15',rest:20},
+      {name:'Bicycle Crunch',sets:3,reps:'15',rest:20},
+      {name:'Lying Floor Leg Raise',sets:3,reps:'15',rest:20},
+      {name:'Weighted Crunch',sets:3,reps:'10',rest:20},
+      {name:'Dumbbell Curls',sets:2,reps:'10',rest:45},
+      {name:'Overhead Dumbbell Extension',sets:2,reps:'10',rest:45},
+      {name:'Barbell Curl',sets:2,reps:'10',rest:45},
+      {name:'Skullcrusher',sets:2,reps:'10',rest:45},
+    ]},
+   ]},
+  {id:'mbj_real',name:'Michael B. Jordan',icon:'🥊',color:'#ff6b9d',type:'strength',category:'Actors',
+   desc:'Black Panther Killmonger — 5-7 day split',
+   days:[
+    {day:'Day 1 — Chest, Shoulders & Triceps',exercises:[
+      {name:'Incline Dumbbell Bench Press',sets:4,reps:'12, 10, 8, 8',rest:90},
+      {name:'Dumbbell Fly',sets:3,reps:'12',rest:60},
+      {name:'Machine Shoulder Press',sets:4,reps:'12, 12, 10, 10',rest:90},
+      {name:'Lateral Raise',sets:3,reps:'12, 10, 10',rest:60},
+      {name:'Dumbbell Shrug',sets:3,reps:'12',rest:60},
+      {name:'Weighted Dip',sets:3,reps:'12, 10, 8',rest:90},
+      {name:'Skullcrusher',sets:2,reps:'12, 10',rest:60},
+      {name:'Boxing Cardio Intervals',sets:1,reps:'15-30 min',rest:0,note:'Heavy bag, speed bag, or sparring'},
+    ]},
+    {day:'Day 2 — Legs & Core',exercises:[
+      {name:'Barbell Squat',sets:4,reps:'12, 10, 8, 8',rest:120},
+      {name:'Leg Press',sets:3,reps:'12',rest:90},
+      {name:'Leg Curl',sets:3,reps:'12, 10, 10',rest:60},
+      {name:'Leg Extension',sets:3,reps:'12, 10, 10',rest:60},
+      {name:'Standing Machine Calf Raise',sets:3,reps:'15-20',rest:45},
+      {name:'Seated Calf Raise',sets:3,reps:'15-20',rest:45},
+      {name:'Plank',sets:3,reps:'20s',rest:20},
+      {name:'Decline Sit Up',sets:3,reps:'12-15',rest:30},
+      {name:'Hanging Leg Raise',sets:3,reps:'12-15',rest:30},
+    ]},
+    {day:'Day 3 — Back & Biceps',exercises:[
+      {name:'Lat Pulldown',sets:4,reps:'12, 12, 10, 10',rest:90},
+      {name:'T-Bar Row',sets:4,reps:'12, 10, 8, 8',rest:90},
+      {name:'Weighted Pull Up',sets:3,reps:'12, 10, 8',rest:90},
+      {name:'Underhand Barbell Row',sets:3,reps:'12, 10, 8',rest:90},
+      {name:'Hyperextension',sets:3,reps:'12-15',rest:45},
+      {name:'Barbell Curl',sets:3,reps:'12, 10, 8',rest:60},
+      {name:'Hammer Curl',sets:3,reps:'12',rest:60},
+    ]},
+    {day:'Day 5 — Chest, Shoulder & Triceps',exercises:[
+      {name:'Seated Dumbbell Press',sets:4,reps:'12, 10, 8, 8',rest:90},
+      {name:'Bent Over Reverse Fly',sets:3,reps:'12',rest:60},
+      {name:'Dumbbell Bench Press',sets:4,reps:'12, 10, 8, 8',rest:90},
+      {name:'Push Up',sets:3,reps:'12-15',rest:45},
+      {name:'Close Grip Push Up',sets:3,reps:'12-15',rest:45},
+      {name:'Rope Pressdown',sets:3,reps:'12, 10, 8',rest:60},
+    ]},
+    {day:'Day 6 — Pull & Posterior',exercises:[
+      {name:'Deadlift',sets:4,reps:'12, 10, 8, 8',rest:120},
+      {name:'Close Grip Lat Pulldown',sets:3,reps:'12, 10, 8',rest:90},
+      {name:'Dumbbell Curl',sets:3,reps:'12',rest:60},
+      {name:'Barbell Hip Thrust',sets:3,reps:'12, 10, 8',rest:60},
+      {name:'Dumbbell Stiff Leg Deadlift',sets:3,reps:'12, 10, 8',rest:90},
+      {name:'Standing Machine Calf Raise',sets:3,reps:'15-20',rest:45},
+      {name:'Seated Calf Raise',sets:3,reps:'15-20',rest:45},
+    ]},
+   ]},
+  {id:'batman_affleck',name:'Ben Affleck — Batman',icon:'🦇',color:'#2a2a3a',type:'strength',category:'Actors',
+   desc:'Batman v Superman — 4 day strength',
+   days:[
+    {day:'Day 1 — Lower Body',exercises:[
+      {name:'Barbell Squats',sets:5,reps:'5',rest:180},
+      {name:'Deadlift',sets:5,reps:'5',rest:180},
+      {name:'Sled Push',sets:4,reps:'10 yards',rest:90},
+      {name:'Heavy Loaded Carry',sets:4,reps:'10 yards',rest:90},
+      {name:'Walking Lunge',sets:3,reps:'15 each',rest:60},
+      {name:'Box Jump',sets:3,reps:'10-12',rest:60},
+      {name:'Seated Calf Raise',sets:4,reps:'6',rest:45},
+    ]},
+    {day:'Day 2 — Upper Body',exercises:[
+      {name:'Overhead Press',sets:5,reps:'5',rest:180},
+      {name:'T-Bar Row',sets:4,reps:'6',rest:120},
+      {name:'Weighted Pull Up',sets:3,reps:'8-12',rest:90},
+      {name:'Push Up',sets:3,reps:'15',rest:60},
+      {name:'Dumbbell Row',sets:4,reps:'8-12',rest:60},
+      {name:'Dumbbell Bench Press',sets:4,reps:'6',rest:90},
+      {name:'Weighted Dips',sets:3,reps:'8-12',rest:60},
+      {name:'Dumbbell Curls',sets:3,reps:'12',rest:45},
+    ]},
+    {day:'Day 3 — Lower Body',exercises:[
+      {name:'Front Squats',sets:5,reps:'5',rest:180},
+      {name:'Romanian Deadlift',sets:4,reps:'6',rest:120},
+      {name:'Sled Drag',sets:4,reps:'10 yards',rest:90},
+      {name:'Sled Push',sets:4,reps:'10 yards',rest:90},
+      {name:'Goblet Squat',sets:3,reps:'8',rest:60},
+      {name:'Lateral Lunge',sets:3,reps:'10 each',rest:60},
+      {name:'Jump Rope',sets:1,reps:'8 min',rest:0},
+    ]},
+    {day:'Day 4 — Upper Body',exercises:[
+      {name:'Bent Over Row',sets:5,reps:'5',rest:180},
+      {name:'Incline Bench Press',sets:4,reps:'6',rest:120},
+      {name:'Seated Dumbbell Press',sets:4,reps:'6',rest:90},
+      {name:'Lateral Raise',sets:3,reps:'10',rest:45},
+      {name:'Cable Face Pull',sets:3,reps:'15',rest:45},
+      {name:'Lat Pull Down',sets:3,reps:'8',rest:60},
+      {name:'Hammer Curl',sets:3,reps:'12',rest:45},
+      {name:'Overhead Tricep Extension',sets:3,reps:'12',rest:45},
+    ]},
+   ]},
+  {id:'arnold',name:'Arnold Schwarzenegger',icon:'💪',color:'#ffa94d',type:'strength',category:'Athletes',
+   desc:'Classic 6-day volume training — 7x Mr. Olympia',
+   days:[
+    {day:'Day 1 & 4 — Chest & Back',exercises:[
+      {name:'Bench Press',sets:4,reps:'10',rest:90},
+      {name:'Incline Bench Press',sets:4,reps:'10',rest:90},
+      {name:'Dumbbell Pullovers',sets:4,reps:'10',rest:60},
+      {name:'Chin Up',sets:4,reps:'10',rest:90},
+      {name:'Bent Over Row',sets:4,reps:'10',rest:90},
+      {name:'Deadlift',sets:4,reps:'10',rest:120},
+      {name:'Crunches',sets:5,reps:'25',rest:30},
+    ]},
+    {day:'Day 2 & 5 — Shoulders & Arms',exercises:[
+      {name:'Barbell Clean and Press',sets:4,reps:'10',rest:90},
+      {name:'Dumbbell Lateral Raise',sets:4,reps:'10',rest:60},
+      {name:'Upright Row',sets:4,reps:'10',rest:60},
+      {name:'Military Press',sets:4,reps:'10',rest:90},
+      {name:'Standing Barbell Curl',sets:4,reps:'10',rest:60},
+      {name:'Seated Dumbbell Curl',sets:4,reps:'10',rest:60},
+      {name:'Close Grip Bench Press',sets:4,reps:'10',rest:90},
+      {name:'Standing Barbell Tricep Extension',sets:4,reps:'10',rest:60},
+      {name:'Wrist Curls',sets:4,reps:'10',rest:30},
+      {name:'Reverse Wrist Curls',sets:4,reps:'10',rest:30},
+      {name:'Reverse Crunch',sets:5,reps:'25',rest:30},
+    ]},
+    {day:'Day 3 & 6 — Legs & Lower Back',exercises:[
+      {name:'Squat',sets:4,reps:'10',rest:120},
+      {name:'Lunge',sets:4,reps:'10',rest:60},
+      {name:'Leg Curl',sets:4,reps:'10',rest:60},
+      {name:'Stiff Leg Deadlift',sets:4,reps:'10',rest:90},
+      {name:'Good Mornings',sets:4,reps:'10',rest:60},
+      {name:'Standing Calf Raise',sets:4,reps:'10',rest:45},
+      {name:'Crunches',sets:5,reps:'25',rest:30},
+    ]},
+   ]},
+  {id:'chris_hemsworth',name:'Chris Hemsworth',icon:'⚡',color:'#ff6b6b',type:'strength',category:'Actors',
+   desc:'Thor Ragnarok — 5 day muscle building split',
+   days:[
+    {day:'Monday — Chest, Back & Abs',exercises:[
+      {name:'Barbell Bench Press',sets:5,reps:'12, 12, 10, 8, 6',rest:90},
+      {name:'Dumbbell Fly',sets:4,reps:'12',rest:60},
+      {name:'Bent-Over Row',sets:4,reps:'12',rest:90},
+      {name:'Hammer Strength Row',sets:4,reps:'12',rest:90},
+      {name:'Weighted Pull Up',sets:5,reps:'15, 12, 10, 10, 8',rest:90},
+      {name:'Weighted Dip',sets:5,reps:'15, 12, 10, 10, 8',rest:90},
+      {name:'Plank',sets:3,reps:'60s',rest:30},
+      {name:'Cable Crunch',sets:3,reps:'12-15',rest:30},
+      {name:'Sit Up',sets:3,reps:'12-15',rest:30},
+      {name:'Hanging Leg Raise',sets:3,reps:'12-15',rest:30},
+    ]},
+    {day:'Tuesday — Legs',exercises:[
+      {name:'Barbell Squat',sets:5,reps:'10, 8, 8, 6, 4',rest:120},
+      {name:'Stiff-Legged Deadlift',sets:4,reps:'12',rest:90},
+      {name:'Hamstring Curls',sets:3,reps:'20',rest:60},
+      {name:'Leg Extension',sets:3,reps:'20',rest:60},
+      {name:'Seated Leg Curl',sets:3,reps:'20',rest:60},
+    ]},
+    {day:'Wednesday — Abs & Arms',exercises:[
+      {name:'Weighted Chin Up',sets:5,reps:'15, 12, 10, 10, 8',rest:90},
+      {name:'Barbell Curls',sets:3,reps:'10',rest:60},
+      {name:'Hammer Curls',sets:3,reps:'10',rest:60},
+      {name:'Cable Tricep Extensions',sets:3,reps:'10',rest:60},
+      {name:'Barbell French Press',sets:3,reps:'10',rest:60},
+      {name:'Plank',sets:3,reps:'60s',rest:30},
+      {name:'Cable Crunch',sets:3,reps:'12-15',rest:30},
+      {name:'Hanging Leg Raise',sets:3,reps:'12-15',rest:30},
+    ]},
+    {day:'Thursday — Chest, Shoulders & Back',exercises:[
+      {name:'Barbell Bench Press',sets:5,reps:'12, 12, 10, 8, 6',rest:90},
+      {name:'Dumbbell Fly',sets:4,reps:'12',rest:60},
+      {name:'Bent-Over Row',sets:4,reps:'12',rest:90},
+      {name:'Bent-Over Lateral Raise',sets:3,reps:'15',rest:45},
+      {name:'Dumbbell Shoulder Press',sets:5,reps:'15, 12, 10, 10, 8',rest:90},
+      {name:'Lateral Raise',sets:4,reps:'12',rest:45},
+      {name:'Front Raise',sets:4,reps:'12',rest:45},
+    ]},
+    {day:'Friday — Legs & Abs',exercises:[
+      {name:'Barbell Squat',sets:5,reps:'10, 8, 8, 6, 4',rest:120},
+      {name:'Stiff-Legged Deadlifts',sets:4,reps:'12',rest:90},
+      {name:'Hamstring Curls',sets:3,reps:'20',rest:60},
+      {name:'Leg Extension',sets:3,reps:'20',rest:60},
+      {name:'Seated Leg Curl',sets:3,reps:'20',rest:60},
+      {name:'Plank',sets:3,reps:'60s',rest:30},
+      {name:'Cable Crunch',sets:3,reps:'12-15',rest:30},
+      {name:'Hanging Leg Raise',sets:3,reps:'12-15',rest:30},
+    ]},
+   ]},
+  {id:'scarlett_johansson',name:'Scarlett Johansson',icon:'🕷️',color:'#ff6b9d',type:'strength',category:'Actresses',
+   desc:'Black Widow — 12 week strength & fat loss',
+   days:[
+    {day:'Day 1 — Full Body Strength',exercises:[
+      {name:'Barbell Back Squat',sets:5,reps:'8, 8, 8, 5, 3',rest:180},
+      {name:'Military Press',sets:5,reps:'8, 8, 8, 5, 3',rest:180},
+      {name:'Barbell Lunge',sets:3,reps:'12 each',rest:90},
+      {name:'Chin Up',sets:3,reps:'12, 10, 8',rest:90},
+      {name:'Dumbbell Row',sets:3,reps:'12, 10, 8',rest:60},
+    ]},
+    {day:'Day 2 — Fat Loss Circuit',exercises:[
+      {name:'Treadmill Warm Up',sets:1,reps:'15 min',rest:0,note:'3 min walk, 10 min jog, 2 min walk'},
+      {name:'Push Up / Air Squat / Pull Up circuit',sets:5,reps:'5 each',rest:30},
+      {name:'Lateral Lunge / Bicep Curl / Tricep Pushdown',sets:5,reps:'5 each',rest:30},
+      {name:'Jump Rope',sets:1,reps:'10 min',rest:0},
+      {name:'Medicine Ball Slams',sets:5,reps:'5',rest:20},
+      {name:'Wall Balls',sets:5,reps:'5',rest:20},
+      {name:'Medicine Ball Front Squat',sets:5,reps:'5',rest:20},
+    ]},
+    {day:'Day 4 — Full Body Strength',exercises:[
+      {name:'Trap Bar Deadlift',sets:5,reps:'8, 8, 8, 5, 3',rest:180},
+      {name:'Barbell Bench Press',sets:5,reps:'8, 8, 8, 5, 3',rest:180},
+      {name:'Bulgarian Split Squat',sets:3,reps:'12 each',rest:90},
+      {name:'Inverted Row',sets:3,reps:'12',rest:60},
+      {name:'Hip Thrust',sets:3,reps:'12, 10, 8',rest:60},
+    ]},
+    {day:'Day 6 — Kettlebell Circuit',exercises:[
+      {name:'Treadmill Warm Up',sets:1,reps:'15 min',rest:0},
+      {name:'Kettlebell Row',sets:5,reps:'5 each',rest:20},
+      {name:'Kettlebell Swing',sets:5,reps:'5',rest:20},
+      {name:'Kettlebell Press',sets:5,reps:'5 each',rest:20},
+      {name:'Kettlebell Romanian Deadlift',sets:5,reps:'5',rest:20},
+      {name:'Kettlebell Goblet Squat',sets:5,reps:'5',rest:20},
+      {name:'Water Rowing Machine HIIT',sets:1,reps:'10 min',rest:0},
+      {name:'Dumbbell Complex (Curl/Squat/OHP/Hammer)',sets:5,reps:'5 each',rest:30},
+    ]},
+   ]},
+  {id:'russell_westbrook',name:'Russell Westbrook',icon:'🏀',color:'#ff6b6b',type:'hiit',category:'Athletes',
+   desc:'NBA performance — speed, power & agility',
+   days:[
+    {day:'Monday — Legs & Abs',exercises:[
+      {name:'Court Sprints (with Single-leg Rope Jump)',sets:5,reps:'sprints',rest:60},
+      {name:'Weighted Box Jumps',sets:3,reps:'10',rest:60},
+      {name:'Stiff Leg Deadlift',sets:3,reps:'10',rest:90},
+      {name:'Barbell Sumo Deadlift',sets:3,reps:'8',rest:90},
+      {name:'DB Side Lunges with Explosive Foot Swing',sets:4,reps:'10',rest:60},
+      {name:'Single-leg Kettlebell Squats',sets:4,reps:'10',rest:60},
+      {name:'Dumbbell Squat Jump',sets:3,reps:'10',rest:60},
+      {name:'Barbell Front Squat',sets:4,reps:'8',rest:90},
+    ]},
+    {day:'Tuesday — Chest, Arms & Shoulders',exercises:[
+      {name:'Physioball DB Chest Press',sets:4,reps:'6-10',rest:90},
+      {name:'Single Leg DB Curl-to-Press',sets:3,reps:'8',rest:60},
+      {name:'Walking DB Push-up to Row',sets:4,reps:'8',rest:60},
+      {name:'Weighted Wide-grip Push Ups',sets:4,reps:'8',rest:60},
+      {name:'Dumbbell Squat Jump',sets:4,reps:'8',rest:45},
+      {name:'Barbell Shrugs',sets:4,reps:'8',rest:60},
+      {name:'Dumbbell Jerk',sets:4,reps:'8',rest:60},
+    ]},
+    {day:'Wednesday — Active Recovery',exercises:[
+      {name:'Weight Plate Pushups Superset',sets:3,reps:'AMRAP',rest:45},
+      {name:'Weighted Pull-Ups',sets:3,reps:'AMRAP',rest:45},
+      {name:'Dumbbell Snatch Superset',sets:3,reps:'12',rest:60},
+      {name:'Single-arm Cable Row',sets:3,reps:'12',rest:60},
+      {name:'Standing Barbell Row',sets:4,reps:'8',rest:60},
+    ]},
+    {day:'Thursday — Back & Basketball Skills',exercises:[
+      {name:'Basketball Skill Work',sets:1,reps:'45-60 min',rest:0,note:'Dribbling, ball screen, passing drills'},
+      {name:'Static Stretching',sets:1,reps:'5-10 min',rest:0},
+    ]},
+    {day:'Friday — Shoulders & Plyometrics',exercises:[
+      {name:'Plate Jump',sets:4,reps:'8-12',rest:60},
+      {name:'Frog Squat Jump',sets:4,reps:'8-15',rest:60},
+      {name:'Box Squat Jump',sets:4,reps:'8-12',rest:60},
+      {name:'Dumbbell Swing Through Jump',sets:3,reps:'6-10',rest:60},
+      {name:'Standing Triple Jump',sets:3,reps:'4-8',rest:60},
+      {name:'Finger Clean',sets:4,reps:'3-6',rest:90},
+      {name:'Dumbbell Jerk',sets:4,reps:'8-10',rest:60},
+      {name:'Concentric Box Jump',sets:4,reps:'6-10',rest:60},
+      {name:'Long Box Jumps',sets:3,reps:'4-8',rest:60},
+    ]},
+   ]},
+];
+
+
+
+const EXERCISE_LIB = {
+  'Chest': [
+    {name:'Barbell Bench Press',sets:4,reps:'8-10',rest:90},
+    {name:'Incline DB Press',sets:4,reps:'10-12',rest:90},
+    {name:'Decline Bench Press',sets:3,reps:'10-12',rest:90},
+    {name:'Dumbbell Fly',sets:3,reps:'12-15',rest:60},
+    {name:'Cable Crossover',sets:3,reps:'12-15',rest:60},
+    {name:'Pec Deck Machine',sets:3,reps:'15',rest:60},
+    {name:'Push-up',sets:4,reps:'15-20',rest:45},
+    {name:'Close Grip Bench Press',sets:3,reps:'10-12',rest:90},
+    {name:'Dips (Chest)',sets:3,reps:'10-15',rest:60},
+    {name:'Landmine Press',sets:3,reps:'10/side',rest:60},
+  ],
+  'Back': [
+    {name:'Barbell Deadlift',sets:4,reps:'4-6',rest:180},
+    {name:'Barbell Row',sets:4,reps:'8-10',rest:120},
+    {name:'Pull-ups',sets:4,reps:'6-10',rest:90},
+    {name:'Lat Pulldown',sets:4,reps:'10-12',rest:60},
+    {name:'Seated Cable Row',sets:4,reps:'10-12',rest:60},
+    {name:'Single Arm DB Row',sets:3,reps:'10-12/side',rest:60},
+    {name:'T-Bar Row',sets:4,reps:'8-10',rest:90},
+    {name:'Face Pulls',sets:4,reps:'15-20',rest:45},
+    {name:'Straight Arm Pulldown',sets:3,reps:'12-15',rest:45},
+    {name:'Chest Supported Row',sets:3,reps:'10-12',rest:60},
+    {name:'Shrugs',sets:4,reps:'12-15',rest:60},
+  ],
+  'Shoulders': [
+    {name:'Barbell Overhead Press',sets:4,reps:'6-8',rest:120},
+    {name:'Dumbbell Shoulder Press',sets:4,reps:'10-12',rest:90},
+    {name:'Arnold Press',sets:3,reps:'10-12',rest:90},
+    {name:'Lateral Raise',sets:5,reps:'12-15',rest:45},
+    {name:'Cable Lateral Raise',sets:4,reps:'12-15/side',rest:45},
+    {name:'Front Raise',sets:3,reps:'12-15',rest:45},
+    {name:'Rear Delt Fly',sets:4,reps:'15',rest:45},
+    {name:'Upright Row',sets:3,reps:'10-12',rest:60},
+    {name:'Band Pull Apart',sets:4,reps:'20',rest:30},
+  ],
+  'Arms': [
+    {name:'Barbell Curl',sets:4,reps:'10-12',rest:60},
+    {name:'Dumbbell Curl',sets:4,reps:'10-12',rest:60},
+    {name:'Hammer Curl',sets:3,reps:'10-12',rest:60},
+    {name:'Incline DB Curl',sets:3,reps:'10-12',rest:60},
+    {name:'Cable Curl',sets:3,reps:'12-15',rest:45},
+    {name:'Preacher Curl',sets:3,reps:'10-12',rest:60},
+    {name:'Tricep Pushdown',sets:4,reps:'12-15',rest:45},
+    {name:'Skull Crushers',sets:4,reps:'10-12',rest:60},
+    {name:'Overhead Tricep Extension',sets:3,reps:'12-15',rest:60},
+    {name:'Close Grip Press',sets:3,reps:'10-12',rest:90},
+    {name:'Dips (Triceps)',sets:3,reps:'10-15',rest:60},
+    {name:'Diamond Push-ups',sets:3,reps:'12-15',rest:45},
+  ],
+  'Legs': [
+    {name:'Back Squat',sets:4,reps:'6-8',rest:120},
+    {name:'Front Squat',sets:3,reps:'6-8',rest:120},
+    {name:'Romanian Deadlift',sets:4,reps:'8-10',rest:90},
+    {name:'Leg Press',sets:4,reps:'10-12',rest:90},
+    {name:'Bulgarian Split Squat',sets:3,reps:'8-10/side',rest:90},
+    {name:'Leg Curl',sets:4,reps:'10-12',rest:60},
+    {name:'Leg Extension',sets:4,reps:'12-15',rest:60},
+    {name:'Hip Thrust',sets:4,reps:'10-12',rest:60},
+    {name:'Walking Lunges',sets:3,reps:'12/side',rest:60},
+    {name:'Goblet Squat',sets:4,reps:'12-15',rest:60},
+    {name:'Sumo Squat',sets:3,reps:'12-15',rest:60},
+    {name:'Standing Calf Raise',sets:5,reps:'15-20',rest:45},
+    {name:'Seated Calf Raise',sets:4,reps:'15-20',rest:45},
+    {name:'Nordic Hamstring Curl',sets:3,reps:'6-8',rest:90},
+    {name:'Cable Kickback',sets:3,reps:'15/side',rest:45},
+    {name:'Abduction Machine',sets:3,reps:'15-20',rest:45},
+  ],
+  'Core': [
+    {name:'Plank',sets:4,reps:'45-60s',rest:30},
+    {name:'Side Plank',sets:3,reps:'45s/side',rest:30},
+    {name:'Hanging Leg Raise',sets:4,reps:'12-15',rest:45},
+    {name:'Cable Crunch',sets:4,reps:'15-20',rest:30},
+    {name:'Ab Wheel Rollout',sets:4,reps:'8-10',rest:45},
+    {name:'Russian Twist',sets:4,reps:'20',rest:30},
+    {name:'Bicycle Crunch',sets:4,reps:'20',rest:30},
+    {name:'Reverse Crunch',sets:4,reps:'15',rest:30},
+    {name:'Dragon Flag',sets:3,reps:'6-8',rest:60},
+    {name:'Dead Bug',sets:3,reps:'10/side',rest:30},
+    {name:'V-Sit',sets:4,reps:'15',rest:30},
+    {name:'Mountain Climbers',sets:4,reps:'30s',rest:20},
+  ],
+  'Cardio': [
+    {name:'Running',sets:1,reps:'20-40 min',rest:0},
+    {name:'Cycling',sets:1,reps:'30-45 min',rest:0},
+    {name:'Jump Rope',sets:5,reps:'2 min',rest:30},
+    {name:'Rowing Machine',sets:1,reps:'20 min',rest:0},
+    {name:'Stair Climber',sets:1,reps:'20 min',rest:0},
+    {name:'Battle Ropes',sets:5,reps:'30s',rest:30},
+    {name:'Sprint Intervals',sets:8,reps:'20s on / 10s off',rest:10},
+    {name:'Burpees',sets:5,reps:'10-15',rest:30},
+    {name:'Box Jumps',sets:5,reps:'8-10',rest:45},
+    {name:'Kettlebell Swing',sets:5,reps:'15-20',rest:45},
+  ],
+  'Glutes': [
+    {name:'Hip Thrust',sets:5,reps:'10-15',rest:60},
+    {name:'Sumo Deadlift',sets:4,reps:'8-10',rest:90},
+    {name:'Cable Kickback',sets:4,reps:'15/side',rest:45},
+    {name:'Glute Bridge',sets:4,reps:'15-20',rest:45},
+    {name:'Clamshell',sets:3,reps:'20/side',rest:30},
+    {name:'Lateral Band Walk',sets:3,reps:'20 steps/side',rest:30},
+    {name:'Single Leg Deadlift',sets:3,reps:'10/side',rest:60},
+    {name:'Donkey Kick',sets:4,reps:'15/side',rest:30},
+    {name:'Step Ups',sets:3,reps:'12/side',rest:60},
+    {name:'Frog Pumps',sets:3,reps:'20',rest:30},
+  ],
+};
+
+
 // ── STATE ─────────────────────────────────────────────────────────────────────
 let CU = null; // current user object {id, username, color, icon}
 let curTab = 'home';
@@ -477,15 +1042,46 @@ async function renderProgList(s){
   const progs=await getUserProgs();
   s.innerHTML='';
   const pad=mk('div',{style:'padding:20px 20px 0'});
+
+  // Header with tabs
   const hdr=mk('div',{style:'display:flex;align-items:center;justify-content:space-between;margin-bottom:16px'});
   hdr.innerHTML='<div style="font-family:Syne,sans-serif;font-size:22px;font-weight:700">Programs</div>';
   const nb=mk('button',{class:'btn btn-p btn-sm',onclick:startBuilder},['+ Create']);
   hdr.appendChild(nb);pad.appendChild(hdr);
-  if(!progs.length)pad.insertAdjacentHTML('beforeend','<div class="card" style="text-align:center;padding:32px;color:#555">No programs yet.<br>Tap + Create to build one.</div>');
-  progs.forEach(p=>{
+
+  // Tab bar: My Programs | Celebrity | Exercise Library
+  const progTabState={tab:'mine'};
+  const tabBar=mk('div',{style:'display:flex;gap:8px;margin-bottom:16px;overflow-x:auto;padding-bottom:4px'});
+  const tabs=[['mine','My Programs'],['celeb','⭐ Templates'],['library','🏋️ Exercise Library']];
+  tabs.forEach(([id,lbl])=>{
+    const b=mk('button',{style:`background:${progTabState.tab===id?'#7c6fff':'#1a1a2a'};border:0.5px solid ${progTabState.tab===id?'#7c6fff':'#2a2a3a'};border-radius:20px;padding:6px 16px;color:${progTabState.tab===id?'#fff':'#888'};font-size:13px;cursor:pointer;white-space:nowrap;font-weight:${progTabState.tab===id?'600':'400'}`});
+    b.textContent=lbl;
+    b.onclick=()=>{progTabState.tab=id;renderProgSection(pad,progTabState,progs);};
+    tabBar.appendChild(b);
+  });
+  pad.appendChild(tabBar);
+
+  const contentDiv=mk('div',{id:'prog-content'});
+  pad.appendChild(contentDiv);
+  s.appendChild(pad);
+  renderProgSection(pad,progTabState,progs);
+}
+
+function renderProgSection(pad,state,progs){
+  const cd=pad.querySelector('#prog-content')||pad;
+  // update tab styles
+  const btns=pad.querySelectorAll('button[data-prog-tab]');
+  // re-render
+  const old=pad.querySelector('#prog-content');
+  if(old)old.innerHTML='';
+  const cont=old||cd;
+
+  if(state.tab==='mine'){
+    if(!progs.length){cont.insertAdjacentHTML('beforeend','<div class="card" style="text-align:center;padding:32px;color:#555">No programs yet.<br>Tap + Create to build one.</div>');}
+    progs.forEach(p=>{
     const isBuiltIn=ALEJ_PROGS.find(x=>x.id===p.id);
     const c=mk('div',{class:'card',style:'cursor:pointer;display:flex;align-items:center;gap:12px'});
-    c.innerHTML=`<div style="width:46px;height:46px;border-radius:14px;background:${p.color||'#7c6fff'}22;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">${p.icon||'💪'}</div><div style="flex:1"><div style="font-family:Syne,sans-serif;font-size:15px;font-weight:700">${p.name}</div><div style="font-size:12px;color:#666;margin-top:2px">${p.desc||''} · ${p.days?p.days.length+' days':''}</div></div>`;
+    c.innerHTML=`<div style="width:46px;height:46px;border-radius:14px;background:${p.color||'#7c6fff'}22;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">${p.icon||'💪'}</div><div style="flex:1"><div style="font-family:Syne,sans-serif;font-size:15px;font-weight:700">${p.name}</div><div style="font-size:12px;color:#666;margin-top:2px">${p.description||''} · ${p.days?p.days.length+' days':''}</div></div>`;
     const btns=mk('div',{style:'display:flex;gap:6px;flex-shrink:0'});
     if(!isBuiltIn){
       const eb=mk('button',{style:'background:#2a2a3a;border:none;border-radius:10px;padding:6px 10px;font-size:14px;cursor:pointer'},['✏️']);
@@ -498,16 +1094,72 @@ async function renderProgList(s){
     sb2.onclick=e=>{e.stopPropagation();activeProg=p;activeDay=0;progView='detail';renderProg();};
     btns.appendChild(sb2);c.appendChild(btns);
     c.onclick=()=>{activeProg=p;activeDay=0;progView='detail';renderProg();};
-    pad.appendChild(c);
+    cont.appendChild(c);
   });
-  s.appendChild(pad);
+
+  } else if(state.tab==='celeb'){
+    // Group by category
+    const categories={};
+    CELEB_PROGS.forEach(p=>{
+      if(!categories[p.category])categories[p.category]=[];
+      categories[p.category].push(p);
+    });
+    Object.entries(categories).forEach(([cat,progs2])=>{
+      cont.insertAdjacentHTML('beforeend',`<div style="font-size:12px;color:#888;font-weight:600;letter-spacing:.5px;margin-bottom:8px;margin-top:8px">${cat.toUpperCase()}</div>`);
+      progs2.forEach(p=>{
+        const c2=mk('div',{class:'card',style:'cursor:pointer;display:flex;align-items:center;gap:12px'});
+        c2.innerHTML=`<div style="width:46px;height:46px;border-radius:14px;background:${p.color}22;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">${p.icon}</div><div style="flex:1"><div style="font-family:Syne,sans-serif;font-size:15px;font-weight:700">${p.name}</div><div style="font-size:12px;color:#666;margin-top:2px">${p.desc} · ${p.days.length} days</div></div>`;
+        const ab=mk('button',{style:'background:#7c6fff22;border:0.5px solid #7c6fff44;border-radius:10px;padding:6px 12px;color:#a88fff;font-size:12px;font-weight:600;cursor:pointer;flex-shrink:0'});
+        ab.textContent='Add';
+        ab.onclick=async e=>{
+          e.stopPropagation();
+          const {error}=await sb.from('programs').insert({username:CU.username,user_id:CU.id,name:p.name,icon:p.icon,color:p.color,type:p.type,description:p.desc,days:p.days});
+          if(!error){toast(p.name+' added to your programs!');}
+        };
+        c2.appendChild(ab);
+        c2.onclick=()=>{activeProg=p;activeDay=0;progView='detail';renderProg();};
+        cont.appendChild(c2);
+      });
+    });
+
+  } else if(state.tab==='library'){
+    // Search bar
+    const srch=mk('div',{style:'margin-bottom:16px'});
+    const si=mkInput('text','Search exercises...',{style:'margin-bottom:0'});
+    srch.appendChild(si);
+    cont.appendChild(srch);
+    const libCont=mk('div',{id:'lib-cont'});
+    cont.appendChild(libCont);
+    const renderLib=(filter)=>{
+      libCont.innerHTML='';
+      Object.entries(EXERCISE_LIB).forEach(([muscle,exes])=>{
+        const filtered=filter?exes.filter(e=>e.name.toLowerCase().includes(filter.toLowerCase())):exes;
+        if(!filtered.length)return;
+        libCont.insertAdjacentHTML('beforeend',`<div style="font-size:12px;color:#888;font-weight:600;letter-spacing:.5px;margin-bottom:8px;margin-top:12px">${muscle.toUpperCase()}</div>`);
+        filtered.forEach(ex=>{
+          const row=mk('div',{style:'display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:0.5px solid #1a1a2a'});
+          row.innerHTML=`<div style="flex:1"><div style="font-size:14px;font-weight:500">${ex.name}</div><div style="font-size:12px;color:#666">${ex.sets} sets · ${ex.reps}${ex.rest?' · '+ex.rest+'s rest':''}</div></div>`;
+          const ab=mk('button',{style:'background:#7c6fff22;border:0.5px solid #7c6fff44;border-radius:10px;padding:6px 12px;color:#a88fff;font-size:12px;font-weight:600;cursor:pointer;flex-shrink:0'});
+          ab.textContent='+ Add';
+          ab.onclick=()=>{
+            toast('Tap + Create, then add "'+ex.name+'" from your plan');
+          };
+          row.appendChild(ab);
+          libCont.appendChild(row);
+        });
+      });
+      if(!libCont.children.length)libCont.insertAdjacentHTML('beforeend','<div style="color:#555;font-size:13px;padding:20px 0">No exercises found</div>');
+    };
+    si.oninput=()=>renderLib(si.value);
+    renderLib('');
+  }
 }
 
 function renderProgDetail(s){
   const p=activeProg;s.innerHTML='';
   const pad=mk('div',{style:'padding:20px 20px 0'});
   pad.insertAdjacentHTML('beforeend',`<div class="back" onclick="progView='list';renderProg()">← Programs</div>`);
-  pad.insertAdjacentHTML('beforeend',`<div style="display:flex;align-items:center;gap:12px;margin-bottom:20px"><div style="width:52px;height:52px;border-radius:16px;background:${p.color||'#7c6fff'}22;display:flex;align-items:center;justify-content:center;font-size:26px">${p.icon||'💪'}</div><div><div style="font-family:Syne,sans-serif;font-size:20px;font-weight:700">${p.name}</div><div style="font-size:13px;color:#666">${p.desc||''}</div></div></div>`);
+  pad.insertAdjacentHTML('beforeend',`<div style="display:flex;align-items:center;gap:12px;margin-bottom:20px"><div style="width:52px;height:52px;border-radius:16px;background:${p.color||'#7c6fff'}22;display:flex;align-items:center;justify-content:center;font-size:26px">${p.icon||'💪'}</div><div><div style="font-family:Syne,sans-serif;font-size:20px;font-weight:700">${p.name}</div><div style="font-size:13px;color:#666">${p.description||''}</div></div></div>`);
   const days=p.days||[];
   if(days.length){
     days.forEach((day,di)=>{
@@ -751,7 +1403,7 @@ async function saveBuilder(){
   syncDay();
   if(!bProg.name||!bProg.name.trim()){alert('Give your program a name!');return;}
   const days=bProg.days.map(d=>({...d,exercises:(d.exercises||[]).map(({_id,...e})=>e)}));
-  const payload={username:CU.username,user_id:CU.id,name:bProg.name.trim(),icon:bIcon,color:bColor,type:bType,desc:days.length+' day'+(days.length>1?'s':''),days};
+  const payload={username:CU.username,user_id:CU.id,name:bProg.name.trim(),icon:bIcon,color:bColor,type:bType,description:days.length+' day'+(days.length>1?'s':''),days};
   if(bEditId){
     await sb.from('programs').update(payload).eq('id',bEditId);
   } else {
