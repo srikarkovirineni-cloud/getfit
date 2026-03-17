@@ -912,54 +912,199 @@ async function renderHome(){
 async function renderSquad(){
   const s=g('s-squad');
   s.innerHTML='<div style="padding:20px"><div class="spinner" style="margin:60px auto"></div></div>';
-  const [{data:users},{data:allW},{data:challenge}]=await Promise.all([
-    sb.from('users').select('*'),
-    sb.from('workouts').select('*').order('logged_at',{ascending:false}),
-    sb.from('challenges').select('*').order('ends_at',{ascending:false}).limit(1),
-  ]);
+
+  // Load user's squads
+  const {data:myMemberships}=await sb.from('squad_members').select('squad_id').eq('username',CU.username);
+  const mySquadIds=(myMemberships||[]).map(m=>m.squad_id);
+
   s.innerHTML='';
   const pad=mk('div',{style:'padding:20px 20px 0'});
-  pad.insertAdjacentHTML('beforeend','<div style="font-family:Syne,sans-serif;font-size:22px;font-weight:700;margin-bottom:4px">Squad</div>');
 
-  // Active challenge banner
-  if(challenge&&challenge.length){
-    const ch=challenge[0];
-    const now=new Date();
-    if(new Date(ch.ends_at)>now){
-      const daysLeft=Math.ceil((new Date(ch.ends_at)-now)/86400000);
-      pad.insertAdjacentHTML('beforeend',`<div class="card" style="background:#ffa94d18;border-color:#ffa94d44;margin-bottom:16px;display:flex;align-items:center;gap:12px"><div style="font-size:24px">🏆</div><div><div style="font-size:14px;font-weight:600">${ch.title}</div><div style="font-size:12px;color:#888">${daysLeft} day${daysLeft!==1?'s':''} left</div></div></div>`);
-    }
+  // Header
+  const hdr=mk('div',{style:'display:flex;align-items:center;justify-content:space-between;margin-bottom:16px'});
+  hdr.innerHTML='<div style="font-family:Syne,sans-serif;font-size:22px;font-weight:700">Squad</div>';
+  const newBtn=mk('button',{class:'btn btn-p btn-sm',onclick:()=>showSquadModal(s)},['+ New squad']);
+  hdr.appendChild(newBtn);pad.appendChild(hdr);
+
+  if(!mySquadIds.length){
+    // No squads yet — show join/create prompt
+    pad.insertAdjacentHTML('beforeend',`
+      <div class="card" style="text-align:center;padding:32px">
+        <div style="font-size:32px;margin-bottom:12px">👥</div>
+        <div style="font-family:Syne,sans-serif;font-size:18px;font-weight:700;margin-bottom:8px">No squads yet</div>
+        <div style="font-size:13px;color:#666;margin-bottom:20px">Create a squad and share the code with friends, or join one with a code</div>
+      </div>
+    `);
+    const joinBtn=mk('button',{class:'btn btn-g',style:'margin-bottom:10px',onclick:()=>showJoinModal(s)},['Join squad with code']);
+    pad.appendChild(joinBtn);
+    s.appendChild(pad);
+    return;
   }
 
-  // Leaderboard
+  // Load all squads user belongs to
+  const {data:squads}=await sb.from('squads').select('*').in('id',mySquadIds);
+  const {data:allMembers}=await sb.from('squad_members').select('*').in('squad_id',mySquadIds);
+  const allUsernames=[...new Set((allMembers||[]).map(m=>m.username))];
+  const {data:allUsers}=await sb.from('users').select('*').in('username',allUsernames);
+  const {data:allW}=await sb.from('workouts').select('*').in('username',allUsernames);
+
+  // Squad selector tabs if multiple squads
+  let activeSquadId=mySquadIds[0];
+  if(!window._activeSquadId||!mySquadIds.includes(window._activeSquadId)){window._activeSquadId=mySquadIds[0];}
+  activeSquadId=window._activeSquadId;
+
+  if((squads||[]).length>1){
+    const tabs=mk('div',{style:'display:flex;gap:6px;margin-bottom:16px;overflow-x:auto;padding-bottom:4px'});
+    (squads||[]).forEach(sq=>{
+      const b=mk('button',{style:`background:${activeSquadId===sq.id?'#7c6fff':'#1a1a2a'};border:0.5px solid ${activeSquadId===sq.id?'#7c6fff':'#2a2a3a'};border-radius:20px;padding:6px 14px;color:${activeSquadId===sq.id?'#fff':'#888'};font-size:13px;cursor:pointer;white-space:nowrap;`});
+      b.textContent=sq.name;
+      b.onclick=()=>{window._activeSquadId=sq.id;renderSquad();};
+      tabs.appendChild(b);
+    });
+    pad.appendChild(tabs);
+  }
+
+  const squad=(squads||[]).find(sq=>sq.id===activeSquadId);
+  if(!squad){s.appendChild(pad);return;}
+
+  // Squad code card
+  const isOwner=squad.owner_username===CU.username;
+  const codeCard=mk('div',{class:'card',style:'background:#7c6fff10;border-color:#7c6fff33;margin-bottom:16px'});
+  codeCard.innerHTML=`
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <div>
+        <div style="font-family:Syne,sans-serif;font-size:15px;font-weight:700">${squad.name}</div>
+        <div style="font-size:12px;color:#888;margin-top:2px">Share this code with friends</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-family:Syne,sans-serif;font-size:24px;font-weight:800;color:#7c6fff;letter-spacing:3px">${squad.code}</div>
+        <div style="font-size:11px;color:#555;cursor:pointer" onclick="navigator.clipboard.writeText('${squad.code}');toast('Code copied!')">tap to copy</div>
+      </div>
+    </div>
+  `;
+  pad.appendChild(codeCard);
+
+  // Leaderboard for this squad
+  const squadUsernames=(allMembers||[]).filter(m=>m.squad_id===activeSquadId).map(m=>m.username);
+  const squadUsers=(allUsers||[]).filter(u=>squadUsernames.includes(u.username));
+  const squadW=(allW||[]).filter(w=>squadUsernames.includes(w.username));
+
   pad.insertAdjacentHTML('beforeend','<div class="sh">Leaderboard</div>');
   const medals=['🥇','🥈','🥉'];
-  const ranked=(users||[]).map(u=>{
-    const uw=(allW||[]).filter(w=>w.username===u.username);
-    return{...u,pts:pts(uw),streak:streak(uw),week:weekWorkouts(uw).length,total:uw.length};
+  const ranked=squadUsers.map(u=>{
+    const uw=squadW.filter(w=>w.username===u.username);
+    return{...u,pts:pts(uw),str:streak(uw),week:weekWorkouts(uw).length,total:uw.length};
   }).sort((a,b)=>b.pts-a.pts);
 
   ranked.forEach((u,i)=>{
     const isMe=u.username===CU.username;
-    const c=mk('div',{style:`background:${isMe?u.color+'18':'#1a1a2a'};border:0.5px solid ${isMe?u.color+'55':'#2a2a3a'};border-radius:16px;padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:12px`});
-    c.innerHTML=`<div style="font-size:22px;width:28px;text-align:center">${medals[i]||'#'+(i+1)}</div><div style="width:40px;height:40px;border-radius:50%;background:${u.color}22;color:${u.color};display:flex;align-items:center;justify-content:center;font-family:Syne,sans-serif;font-size:14px;font-weight:700">${ini(u.username)}</div><div style="flex:1"><div style="font-size:15px;font-weight:500">${u.username}${isMe?' (you)':''}</div><div style="font-size:12px;color:#666">🔥 ${u.streak} streak · ${u.week} this week</div></div><div style="text-align:right"><div style="font-family:Syne,sans-serif;font-size:18px;font-weight:800;color:${u.color}">${u.pts}</div><div style="font-size:10px;color:#555">pts</div></div>`;
-    pad.appendChild(c);
+    const c2=mk('div',{style:`background:${isMe?u.color+'18':'#1a1a2a'};border:0.5px solid ${isMe?u.color+'55':'#2a2a3a'};border-radius:16px;padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:12px`});
+    c2.innerHTML=`<div style="font-size:22px;width:28px;text-align:center">${medals[i]||'#'+(i+1)}</div><div style="width:40px;height:40px;border-radius:50%;background:${u.color}22;color:${u.color};display:flex;align-items:center;justify-content:center;font-family:Syne,sans-serif;font-size:14px;font-weight:700">${ini(u.username)}</div><div style="flex:1"><div style="font-size:15px;font-weight:500">${u.username}${isMe?' (you)':''}</div><div style="font-size:12px;color:#666">🔥 ${u.str} streak · ${u.week} this week</div></div><div style="text-align:right"><div style="font-family:Syne,sans-serif;font-size:18px;font-weight:800;color:${u.color}">${u.pts}</div><div style="font-size:10px;color:#555">pts</div></div>`;
+    pad.appendChild(c2);
   });
 
   // Activity feed
   pad.insertAdjacentHTML('beforeend','<div class="sh" style="margin-top:8px">This week</div>');
   const weekAgo=new Date();weekAgo.setDate(weekAgo.getDate()-7);
-  const feed=(allW||[]).filter(w=>new Date(w.logged_at)>=weekAgo).slice(0,15);
-  if(!feed.length)pad.insertAdjacentHTML('beforeend','<div style="color:#555;font-size:13px">No activity yet this week</div>');
+  const feed=squadW.filter(w=>new Date(w.logged_at)>=weekAgo).sort((a,b)=>new Date(b.logged_at)-new Date(a.logged_at)).slice(0,15);
+  if(!feed.length)pad.insertAdjacentHTML('beforeend','<div style="color:#555;font-size:13px;margin-bottom:12px">No activity yet this week</div>');
   feed.forEach(w=>{
-    const u=(users||[]).find(x=>x.username===w.username)||{color:'#7c6fff',username:w.username};
+    const u=(squadUsers||[]).find(x=>x.username===w.username)||{color:'#7c6fff',username:w.username};
     const t=TYPES.find(x=>x.id===w.type)||TYPES[0];
-    const c=mk('div',{style:'display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:0.5px solid #1a1a2a'});
-    c.innerHTML=`<div style="width:32px;height:32px;border-radius:50%;background:${u.color}22;color:${u.color};display:flex;align-items:center;justify-content:center;font-family:Syne,sans-serif;font-size:11px;font-weight:700">${ini(u.username)}</div><div style="flex:1;font-size:13px"><span style="font-weight:500">${u.username}</span> · ${t.icon} ${w.program_name||t.label}<div style="font-size:11px;color:#555">${w.duration} min · ${new Date(w.logged_at).toLocaleDateString()}</div></div><div style="font-size:12px;color:#a88fff;font-weight:500">+${t.pts*(w.intensity||2)}</div>`;
-    pad.appendChild(c);
+    const c3=mk('div',{style:'display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:0.5px solid #1a1a2a'});
+    c3.innerHTML=`<div style="width:32px;height:32px;border-radius:50%;background:${u.color}22;color:${u.color};display:flex;align-items:center;justify-content:center;font-family:Syne,sans-serif;font-size:11px;font-weight:700">${ini(u.username)}</div><div style="flex:1;font-size:13px"><span style="font-weight:500">${u.username}</span> · ${t.icon} ${w.program_name||t.label}<div style="font-size:11px;color:#555">${w.duration} min · ${new Date(w.logged_at).toLocaleDateString()}</div></div><div style="font-size:12px;color:#a88fff;font-weight:500">+${t.pts*(w.intensity||2)}</div>`;
+    pad.appendChild(c3);
   });
+
+  // Join another squad button
+  const joinRow=mk('div',{style:'display:flex;gap:10px;margin-top:16px;margin-bottom:20px'});
+  const jb=mk('button',{class:'btn btn-g',style:'flex:1',onclick:()=>showJoinModal(s)},['Join another squad']);
+  joinRow.appendChild(jb);
+  if(isOwner){
+    const lb=mk('button',{style:'background:#ff444418;border:0.5px solid #ff444433;border-radius:14px;padding:14px;color:#ff7070;font-size:13px;cursor:pointer;flex:1',onclick:async()=>{
+      if(!confirm('Delete this squad? All members will lose access.'))return;
+      await sb.from('squads').delete().eq('id',squad.id);
+      window._activeSquadId=null;toast('Squad deleted');renderSquad();
+    }},['Delete squad']);
+    joinRow.appendChild(lb);
+  } else {
+    const lb=mk('button',{style:'background:#ff444418;border:0.5px solid #ff444433;border-radius:14px;padding:14px;color:#ff7070;font-size:13px;cursor:pointer;flex:1',onclick:async()=>{
+      if(!confirm('Leave this squad?'))return;
+      await sb.from('squad_members').delete().eq('squad_id',squad.id).eq('username',CU.username);
+      window._activeSquadId=null;toast('Left squad');renderSquad();
+    }},['Leave squad']);
+    joinRow.appendChild(lb);
+  }
+  pad.appendChild(joinRow);
   s.appendChild(pad);
 }
+
+function showSquadModal(parentScreen){
+  const modal=mk('div',{style:'position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:200;display:flex;align-items:flex-end'});
+  const sheet=mk('div',{style:'background:#1a1a2a;border-radius:24px 24px 0 0;padding:24px 20px 40px;width:100%'});
+  sheet.insertAdjacentHTML('beforeend','<div style="width:40px;height:4px;background:#3a3a4a;border-radius:2px;margin:0 auto 20px"></div>');
+  sheet.insertAdjacentHTML('beforeend','<div style="font-family:Syne,sans-serif;font-size:20px;font-weight:700;margin-bottom:20px">Create a squad</div>');
+  const ni=mkInput('text','Squad name e.g. Gym Rats 💪',{style:'margin-bottom:12px'});
+  sheet.appendChild(ni);
+  const er=mk('div',{class:'err'});
+  const cb=mk('button',{class:'btn btn-p'},['Create squad']);
+  cb.onclick=async()=>{
+    const name=ni.value.trim();
+    if(!name){er.textContent='Enter a squad name';return;}
+    cb.textContent='Creating...';cb.disabled=true;
+    // Generate 6-char code
+    const code=Math.random().toString(36).slice(2,8).toUpperCase();
+    const {data:squad,error}=await sb.from('squads').insert({name,code,owner_username:CU.username}).select().single();
+    if(error){er.textContent='Error creating squad';cb.textContent='Create squad';cb.disabled=false;return;}
+    await sb.from('squad_members').insert({squad_id:squad.id,username:CU.username});
+    window._activeSquadId=squad.id;
+    modal.remove();
+    toast('Squad created! Code: '+code);
+    renderSquad();
+  };
+  sheet.append(er,cb);
+  const cancel=mk('button',{class:'btn btn-g',style:'margin-top:10px',onclick:()=>modal.remove()},['Cancel']);
+  sheet.appendChild(cancel);
+  modal.appendChild(sheet);
+  modal.onclick=e=>{if(e.target===modal)modal.remove();};
+  parentScreen.appendChild(modal);
+}
+
+function showJoinModal(parentScreen){
+  const modal=mk('div',{style:'position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:200;display:flex;align-items:flex-end'});
+  const sheet=mk('div',{style:'background:#1a1a2a;border-radius:24px 24px 0 0;padding:24px 20px 40px;width:100%'});
+  sheet.insertAdjacentHTML('beforeend','<div style="width:40px;height:4px;background:#3a3a4a;border-radius:2px;margin:0 auto 20px"></div>');
+  sheet.insertAdjacentHTML('beforeend','<div style="font-family:Syne,sans-serif;font-size:20px;font-weight:700;margin-bottom:20px">Join a squad</div>');
+  sheet.insertAdjacentHTML('beforeend','<div style="font-size:13px;color:#888;margin-bottom:12px">Enter the 6-character code your squad owner shared with you</div>');
+  const ci=mkInput('text','Squad code e.g. ABC123',{style:'margin-bottom:12px;text-transform:uppercase;letter-spacing:4px;font-size:20px;text-align:center;font-family:Syne,sans-serif'});
+  ci.maxLength=6;
+  ci.oninput=()=>ci.value=ci.value.toUpperCase();
+  sheet.appendChild(ci);
+  const er=mk('div',{class:'err'});
+  const jb=mk('button',{class:'btn btn-p'},['Join squad']);
+  jb.onclick=async()=>{
+    const code=ci.value.trim().toUpperCase();
+    if(code.length!==6){er.textContent='Enter a 6-character code';return;}
+    jb.textContent='Joining...';jb.disabled=true;
+    const {data:squad,error}=await sb.from('squads').select('*').eq('code',code).single();
+    if(error||!squad){er.textContent='Squad not found — check the code';jb.textContent='Join squad';jb.disabled=false;return;}
+    // Check already a member
+    const {data:existing}=await sb.from('squad_members').select('*').eq('squad_id',squad.id).eq('username',CU.username).single();
+    if(existing){er.textContent="You're already in this squad";jb.textContent='Join squad';jb.disabled=false;return;}
+    await sb.from('squad_members').insert({squad_id:squad.id,username:CU.username});
+    window._activeSquadId=squad.id;
+    modal.remove();
+    toast('Joined '+squad.name+'! 🎉');
+    renderSquad();
+  };
+  sheet.append(er,jb);
+  const cancel=mk('button',{class:'btn btn-g',style:'margin-top:10px',onclick:()=>modal.remove()},['Cancel']);
+  sheet.appendChild(cancel);
+  modal.appendChild(sheet);
+  modal.onclick=e=>{if(e.target===modal)modal.remove();};
+  parentScreen.appendChild(modal);
+}
+
 
 // ── LOG ───────────────────────────────────────────────────────────────────────
 function renderLog(){
