@@ -1,14 +1,13 @@
-const CACHE = 'getfit-v1';
-const ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  'https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap'
-];
+const CACHE = 'getfit-v2';
+const BASE = '/getfit';
 
 self.addEventListener('install', e => {
   e.waitUntil(
-    caches.open(CACHE).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting())
+    caches.open(CACHE).then(c => c.addAll([
+      BASE + '/',
+      BASE + '/index.html',
+      BASE + '/manifest.json',
+    ])).then(() => self.skipWaiting())
   );
 });
 
@@ -29,7 +28,7 @@ self.addEventListener('fetch', e => {
         const clone = res.clone();
         caches.open(CACHE).then(c => c.put(e.request, clone));
         return res;
-      }).catch(() => caches.match('/index.html'));
+      }).catch(() => caches.match(BASE + '/index.html'));
     })
   );
 });
