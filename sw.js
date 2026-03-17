@@ -1,13 +1,12 @@
-const CACHE = 'getfit-v2';
-const BASE = '/getfit';
+const CACHE = 'getfit-v3';
 
 self.addEventListener('install', e => {
+  self.skipWaiting();
   e.waitUntil(
     caches.open(CACHE).then(c => c.addAll([
-      BASE + '/',
-      BASE + '/index.html',
-      BASE + '/manifest.json',
-    ])).then(() => self.skipWaiting())
+      '/getfit/index.html',
+      '/getfit/manifest.json'
+    ]).catch(() => {}))
   );
 });
 
@@ -20,15 +19,16 @@ self.addEventListener('activate', e => {
 });
 
 self.addEventListener('fetch', e => {
+  if (e.request.method !== 'GET') return;
   e.respondWith(
-    caches.match(e.request).then(cached => {
-      if (cached) return cached;
-      return fetch(e.request).then(res => {
-        if (!res || res.status !== 200 || res.type !== 'basic') return res;
-        const clone = res.clone();
-        caches.open(CACHE).then(c => c.put(e.request, clone));
-        return res;
-      }).catch(() => caches.match(BASE + '/index.html'));
-    })
+    fetch(e.request).then(res => {
+      const clone = res.clone();
+      caches.open(CACHE).then(c => c.put(e.request, clone));
+      return res;
+    }).catch(() =>
+      caches.match(e.request).then(cached =>
+        cached || caches.match('/getfit/index.html')
+      )
+    )
   );
 });
