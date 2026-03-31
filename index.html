@@ -129,6 +129,57 @@ const ALEJ_PROGS = [
    ]}
 ];
 
+
+
+const SRIKAR_PROGS = [
+  {id:'srikar_main',name:'My Program',icon:'💪',color:'#7c6fff',type:'strength',
+   desc:'5-day hypertrophy split — progressive overload',
+   days:[
+    {day:'Day 1 — Chest & Triceps',exercises:[
+      {name:'Bench Press',sets:4,reps:'6-8',rest:180,note:'Go heavy — progressive overload'},
+      {name:'Incline Dumbbell Press',sets:3,reps:'8-10',rest:120},
+      {name:'Chest Fly (Machine or DB)',sets:3,reps:'10-12',rest:90},
+      {name:'Cable Tricep Pushdown',sets:3,reps:'10-12',rest:90},
+      {name:'Overhead Tricep Extension',sets:3,reps:'10-12',rest:90},
+      {name:'Dips',sets:2,reps:'to failure',rest:60,note:'Optional'},
+    ]},
+    {day:'Day 2 — Back & Biceps',exercises:[
+      {name:'Deadlift',sets:3,reps:'5',rest:180,note:'Heavy — slow controlled'},
+      {name:'Lat Pulldown / Pull-Ups',sets:4,reps:'8-10',rest:120},
+      {name:'Seated Cable Row',sets:3,reps:'10',rest:90},
+      {name:'Dumbbell Curl',sets:3,reps:'10-12',rest:90},
+      {name:'Hammer Curl',sets:3,reps:'10-12',rest:60},
+    ]},
+    {day:'Day 3 — Legs',exercises:[
+      {name:'Squat',sets:4,reps:'6-8',rest:180,note:"Do not skip — huge for fat loss"},
+      {name:'Romanian Deadlift',sets:3,reps:'8',rest:120},
+      {name:'Leg Press',sets:3,reps:'10',rest:90},
+      {name:'Hamstring Curl',sets:3,reps:'10-12',rest:60},
+      {name:'Calf Raises',sets:4,reps:'12-15',rest:45},
+    ]},
+    {day:'Day 4 — Shoulders & Core',exercises:[
+      {name:'Overhead Press',sets:4,reps:'6-8',rest:180,note:'Go heavy'},
+      {name:'Lateral Raises',sets:3,reps:'12-15',rest:60},
+      {name:'Rear Delt Fly',sets:3,reps:'12-15',rest:60},
+      {name:'Hanging Leg Raises',sets:3,reps:'10-12',rest:60},
+      {name:'Plank',sets:3,reps:'30-60s',rest:30},
+    ]},
+    {day:'Day 5 — Full Body / Weak Points',exercises:[
+      {name:'Incline Bench or Chest Press',sets:3,reps:'8-10',rest:120},
+      {name:'Pull-Ups / Lat Pulldown',sets:3,reps:'8-10',rest:120},
+      {name:'Leg Press or Lunges',sets:3,reps:'10',rest:90},
+      {name:'Lateral Raises',sets:3,reps:'12-15',rest:60},
+      {name:'Bicep Curl',sets:2,reps:'12',rest:60},
+      {name:'Tricep Pushdown',sets:2,reps:'12',rest:60},
+    ]},
+    {day:'Cardio',exercises:[
+      {name:'Incline Walk',sets:1,reps:'20-30 min',rest:0,note:'3-4x/week, target 8-12k steps/day'},
+      {name:'Stairmaster',sets:1,reps:'10-15 min',rest:0,note:'Alt option'},
+      {name:'Light Jog',sets:1,reps:'20 min',rest:0,note:'Alt option'},
+    ]},
+  ]},
+];
+
 // ── CELEBRITY & ATHLETE PROGRAMS ──────────────────────────────────────────────
 const CELEB_PROGS = [
   {id:'daisy_ridley',name:'Daisy Ridley',icon:'⚔️',color:'#4ecdc4',type:'strength',category:'Actresses',
@@ -1179,6 +1230,7 @@ async function getUserProgs(){
   const {data}=await sb.from('programs').select('*').eq('username',CU.username);
   const custom=(data||[]).map(p=>({...p,days:p.days||[]}));
   if(CU.username===ALEJ)return[...ALEJ_PROGS,...custom];
+  if(CU.username==='srikar')return[...SRIKAR_PROGS,...custom];
   return custom;
 }
 
